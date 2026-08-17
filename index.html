@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>One More Game</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header and Navigation -->
+
+    <header>
+
+        <h1>🏀 One More Game</h1>
+
+        <nav>
+
+            <button onclick="showSection('account')">
+                Account
+            </button>
+
+            <button onclick="showSection('map')">
+                Court Map
+            </button>
+
+            <button onclick="showSection('browse')">
+                Browse Games
+            </button>
+
+            <button onclick="showSection('game')">
+                Create Game
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- Home Page / Court Status -->
+
+        <section id="home" class="section active">
+
+            <h2>Court Status</h2>
+
+            <p class="intro">
+                Check which courts have active games and which courts are available.
+            </p>
+
+            <div class="status-container">
+
+                <!-- Court 1 -->
+
+                <div class="status-card">
+
+                    <h3>🏀 Court 1</h3>
+
+                    <p class="available">
+                        Available
+                    </p>
+
+                    <p>
+                        Open for a new game
+                    </p>
+
+                </div>
+
+
+                <!-- Court 2 -->
+
+                <div class="status-card">
+
+                    <h3>🏀 Court 2</h3>
+
+                    <p class="active-game">
+                        Active Game
+                    </p>
+
+                    <p>
+                        Game: 3 vs 3
+                    </p>
+
+                    <p>
+                        Players: 4 / 6
+                    </p>
+
+                </div>
+
+
+                <!-- Court 3 -->
+
+                <div class="status-card">
+
+                    <h3>🏀 Court 3</h3>
+
+                    <p class="available">
+                        Available
+                    </p>
+
+                    <p>
+                        Open for a new game
+                    </p>
+
+                </div>
+
+
+                <!-- Court 4 -->
+
+                <div class="status-card">
+
+                    <h3>🏀 Court 4</h3>
+
+                    <p class="active-game">
+                        Active Game
+                    </p>
+
+                    <p>
+                        Game: 5 vs 5
+                    </p>
+
+                    <p>
+                        Players: 10 / 10
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Account Page -->
+
+        <section id="account" class="section">
+
+            <h2>Create an Account</h2>
+
+            <form id="accountForm">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your username"
+                    required
+                >
+
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <label for="skillLevel">
+                    Skill Level
+                </label>
+
+                <select id="skillLevel">
+
+                    <option value="Beginner">
+                        Beginner
+                    </option>
+
+                    <option value="Intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="Advanced">
+                        Advanced
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <p id="accountMessage"></p>
+
+        </section>
+
+
+        <!-- Court Map Page -->
+
+        <section id="map" class="section">
+
+            <h2>Court Map</h2>
+
+            <p class="intro">
+                View the current status of each basketball court.
+            </p>
+
+
+            <div class="map-legend">
+
+                <h3>Legend</h3>
+
+                <p>
+                    🟢 Available Court
+                </p>
+
+                <p>
+                    🟡 Partially Full
+                </p>
+
+                <p>
+                    🔴 Full / Active Game
+                </p>
+
+            </div>
+
+
+            <div class="court-map">
+
+
+                <div class="court available-court">
+
+                    <h3>🏀 Court 1</h3>
+
+                    <p>
+                        Available
+                    </p>
+
+                </div>
+
+
+                <div class="court partial-court">
+
+                    <h3>🏀 Court 2</h3>
+
+                    <p>
+                        Partially Full
+                    </p>
+
+                    <p>
+                        4 / 6 Players
+                    </p>
+
+                </div>
+
+
+                <div class="court available-court">
+
+                    <h3>🏀 Court 3</h3>
+
+                    <p>
+                        Available
+                    </p>
+
+                </div>
+
+
+                <div class="court active-court">
+
+                    <h3>🏀 Court 4</h3>
+
+                    <p>
+                        Full
+                    </p>
+
+                    <p>
+                        10 / 10 Players
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Browse Games Page -->
+
+        <section id="browse" class="section">
+
+            <h2>Browse Games</h2>
+
+            <p class="intro">
+                Browse available basketball games and join a game.
+            </p>
+
+
+            <div class="game-list">
+
+
+                <div class="game-card">
+
+                    <h3>
+                        Court 2
+                    </h3>
+
+                    <p>
+                        Game Type: 3 vs 3
+                    </p>
+
+                    <p>
+                        Players: 4 / 6
+                    </p>
+
+                    <p>
+                        Skill Level: Intermediate
+                    </p>
+
+                    <button onclick="joinGame('Court 2')">
+                        Join Game
+                    </button>
+
+                </div>
+
+
+                <div class="game-card">
+
+                    <h3>
+                        Court 4
+                    </h3>
+
+                    <p>
+                        Game Type: 5 vs 5
+                    </p>
+
+                    <p>
+                        Players: 10 / 10
+                    </p>
+
+                    <p>
+                        Skill Level: Advanced
+                    </p>
+
+                    <button disabled>
+                        Game Full
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+            <p id="joinMessage"></p>
+
+        </section>
+
+
+        <!-- Create Game Page -->
+
+        <section id="game" class="section">
+
+            <h2>Create a Game</h2>
+
+
+            <form id="gameForm">
+
+
+                <label for="courtSelect">
+                    Select a Court
+                </label>
+
+                <select id="courtSelect" required>
+
+                    <option value="">
+                        Select a court
+                    </option>
+
+                    <option value="Court 1">
+                        Court 1 - Available
+                    </option>
+
+                    <option value="Court 3">
+                        Court 3 - Available
+                    </option>
+
+                </select>
+
+
+                <label for="gameType">
+                    Game Type
+                </label>
+
+                <select id="gameType" required>
+
+                    <option value="">
+                        Select game type
+                    </option>
+
+                    <option value="1 vs 1">
+                        1 vs 1
+                    </option>
+
+                    <option value="3 vs 3">
+                        3 vs 3
+                    </option>
+
+                    <option value="5 vs 5">
+                        5 vs 5
+                    </option>
+
+                </select>
+
+
+                <label for="gameSkill">
+                    Skill Level
+                </label>
+
+                <select id="gameSkill" required>
+
+                    <option value="">
+                        Select skill level
+                    </option>
+
+                    <option value="Beginner">
+                        Beginner
+                    </option>
+
+                    <option value="Intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="Advanced">
+                        Advanced
+                    </option>
+
+                </select>
+
+
+                <label for="gameTime">
+                    Start Time
+                </label>
+
+                <input
+                    type="time"
+                    id="gameTime"
+                    required
+                >
+
+
+                <button type="submit">
+                    Create Game
+                </button>
+
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    onclick="cancelGame()"
+                >
+                    Cancel Game
+                </button>
+
+
+            </form>
+
+
+            <p id="gameMessage"></p>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            🏀 One More Game
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
