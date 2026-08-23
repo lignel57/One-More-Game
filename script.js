@@ -195,3 +195,100 @@ function joinGame(court) {
         + "!";
 
 }
+
+
+
+
+// Court Map Code (Michael Lignelle)
+var center = [39.709974, -75.117575];
+//initialize court player count.
+var count = 0;
+
+
+
+var bounds = L.latLngBounds(
+    [center[0] - 0.001, center[1] - 0.0015],  // southwest corner
+    [center[0] + 0.001, center[1] + 0.0015]   // northeast corner
+);
+
+var map = L.map('leafletMap', {
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0,
+    minZoom: 18,
+    maxZoom: 18
+}).setView(center, 18);
+
+
+//Tile layers from Maptiler (including attribution)
+
+L.tileLayer('https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=tJwk9meS0E9ByXaEfPw7', {
+    attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+}).addTo(map);
+
+
+// Names and coordinates of the two courts
+
+var courts = [
+    {
+        name: "Trail",
+        coordinates: [39.709435, -75.116998]
+    },
+    {
+        name: "Rec Center",
+        coordinates: [39.710367073297384, -75.11807590270632]
+    }
+];
+
+//Function to get court Status to give the court status colors. 
+function getStatus(count){
+    if (count >=4) return "#2ecc71"; //green
+    if (count >= 1) return "#f1c40f"; //yellow
+    return "#e74c3c" //red
+}
+
+
+//places markers of the courts based on court status (not implemented yet)
+// Red for empty, Yellow for 1-3. and Green for 4+ 
+
+
+courts.forEach(function(court) {
+    court.marker = L.circleMarker(court.coordinates, {
+        radius: 10,
+        color: "#333",
+        weight: 1,
+        fillColor: getStatus(court.playerCount),
+        fillOpacity: 0.9
+    })
+        .addTo(map)
+        .bindPopup("<strong>" + court.name + "</strong><br>");   //Used to claude to update the old marker function for the future dynamic markers with the previous getStatus function
+});
+ 
+
+//Map Legend
+
+
+var legend = L.control({position: 'bottomright'});
+
+// Color coded court status
+legend.onAdd = function (map){
+    var div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML = 
+    '<h4>Court Status</h4>' +
+    '<div class = "legend-row"><span class = "legend-marker" style ="background:#e74c3c;"></span>Red: Empty</div>' +
+        '\n<div class = "legend-row"><span class = "legend-marker" style = "background: #f1c40f;"></span> Yellow: 1-3 Players</div>' +
+        '\n<div class = "legend-row"><span class = "legend-marker" style = "background: #2ecc71;"></span> Green: 4+ Players</div>';
+
+        return div;
+};
+
+legend.addTo(map)
+
+const mapSection = document.getElementById('map');
+const mapObserver = new MutationObserver(function() {
+    if (mapSection.classList.contains('active')) {
+        map.invalidateSize();
+    }
+});
+mapObserver.observe(mapSection, { attributes: true, attributeFilter: ['class'] });
+
+;
