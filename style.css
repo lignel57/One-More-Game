@@ -372,6 +372,47 @@ footer {
 }
 
 
+
+
+
+    /*Styling for map position(Michael Lignelle*/
+        #leafletMap {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+        }
+
+     
+
+    /*Styling for map legend*/
+        .info.legend {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            line-height: 20px;
+            color: #333;
+        }
+        .info.legend h4 {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+        }
+        .legend-marker {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .legend-row {
+            margin-bottom: 2px;
+        }
+
+
+
 /* Mobile */
 
 @media (max-width: 600px) {
