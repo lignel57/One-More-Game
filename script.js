@@ -199,6 +199,56 @@ function joinGame(court) {
 
 
 
+// Fetch and render live Court Status from games_list.php
+function loadCourtStatus() {
+    fetch('php/games_list.php')
+        .then(function(response) {
+            if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
+            return response.json();
+        })
+        .then(function(data) {
+            renderCourtStatus(data.games);
+        })
+        .catch(function(error) {
+            console.error('Failed to load court status:', error);
+        });
+}
+
+function renderCourtStatus(games) {
+    const container = document.querySelector('#home .status-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (!games || games.length === 0) {
+        container.innerHTML = '<p>No active games right now.</p>';
+        return;
+    }
+
+    games.forEach(function(game) {
+        const card = document.createElement('div');
+        card.className = 'status-card';
+
+        card.innerHTML =
+            '<h3>🏀 ' + game.court_name + '</h3>' +
+            '<p class="active-game">Active Game</p>' +
+            '<p>' + game.format + '</p>' +
+            '<p>Players: ' + game.current_players + ' / ' + game.max_players + '</p>' +
+            '<p>Skill: ' + game.skill_level + '</p>';
+
+        container.appendChild(card);
+    });
+}
+
+loadCourtStatus();
+
+// Optional: refresh every 30 seconds so status stays live
+setInterval(loadCourtStatus, 30000);
+
+
+
+
+
 // Court Map Code (Michael Lignelle)
 var center = [39.709974, -75.117575];
 //initialize court player count.
@@ -230,11 +280,11 @@ L.tileLayer('https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=tJw
 
 var courts = [
     {
-        name: "Trail",
+        name: "Walking Trail",
         coordinates: [39.709435, -75.116998]
     },
     {
-        name: "Rec Center",
+        name: "Recreation Center",
         coordinates: [39.710367073297384, -75.11807590270632]
     }
 ];
