@@ -12,8 +12,8 @@
 </head>
 
     <!-- From Leafletjs.com -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<link rel="stylesheet" href="[unpkg.com](https://unpkg.com/leaflet@1.9.4/dist/leaflet.css)" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="[unpkg.com](https://unpkg.com/leaflet@1.9.4/dist/leaflet.js)" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 
 
@@ -276,108 +276,75 @@
 
             <h2>Create a Game</h2>
 
-
             <form id="gameForm">
 
-
+                <!-- G.2 - location input, populated dynamically from the courts table -->
                 <label for="courtSelect">
                     Select a Court
                 </label>
 
                 <select id="courtSelect" required>
-
                     <option value="">
                         Select a court
                     </option>
-
-                    <option value="Court 1">
-                        Recreation Center - Available
-                    </option>
-
-                    <option value="Court 3">
-                        Walking Trail - Available
-                    </option>
-
                 </select>
 
-
+                <!-- G.2.1 - game format selector -->
                 <label for="gameType">
-                    Game Type
+                    Game Format
                 </label>
 
                 <select id="gameType" required>
-
-                    <option value="">
-                        Select game type
-                    </option>
-
-                    <option value="1 vs 1">
-                        1 vs 1
-                    </option>
-
-                    <option value="3 vs 3">
-                        3 vs 3
-                    </option>
-
-                    <option value="5 vs 5">
-                        5 vs 5
-                    </option>
-
+                    <option value="">Select game format</option>
+                    <option value="5v5">5v5</option>
+                    <option value="4v4">4v4</option>
+                    <option value="3v3">3v3</option>
+                    <option value="2v2">2v2</option>
                 </select>
 
-
+                <!-- G.2.2 - skill level selector -->
                 <label for="gameSkill">
                     Skill Level
                 </label>
 
                 <select id="gameSkill" required>
-
-                    <option value="">
-                        Select skill level
-                    </option>
-
-                    <option value="Beginner">
-                        Beginner
-                    </option>
-
-                    <option value="Intermediate">
-                        Intermediate
-                    </option>
-
-                    <option value="Advanced">
-                        Advanced
-                    </option>
-
+                    <option value="">Select skill level</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Competitive">Competitive</option>
                 </select>
 
-
+                <!-- G.2 / G.4 - start time, defaults to current time -->
                 <label for="gameTime">
                     Start Time
                 </label>
 
-                <input
-                    type="time"
-                    id="gameTime"
-                    required
-                >
+                <input type="time" id="gameTime" required>
 
+                <!-- G.2 - maximum number of players -->
+                <label for="maxPlayers">
+                    Max Players
+                </label>
+
+                <input type="number" id="maxPlayers" min="2" max="20" required>
+
+                <!-- G.2.3 - description field -->
+                <label for="gameDescription">
+                    Description
+                </label>
+
+                <textarea id="gameDescription" maxlength="255"
+                    placeholder="Notes on player group or other game details (optional)"></textarea>
 
                 <button type="submit">
                     Create Game
                 </button>
 
-
-                <button
-                    type="button"
-                    class="cancel-button"
-                    onclick="cancelGame()"
-                >
+                <button type="button" class="cancel-button" onclick="cancelGame()">
                     Cancel Game
                 </button>
 
-
             </form>
-
 
             <p id="gameMessage"></p>
 
