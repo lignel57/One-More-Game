@@ -1,0 +1,12 @@
+ONE MORE GAME - LOGIN SPRINT
+
+TEST LOGIN
+Username: Jesse
+Password: cool
+
+HOW TO TEST
+1. Open login.php on a PHP-capable server.
+2. Try a blank field -> you should see: "Please enter your username and password."
+3. Try a wrong login -> you should see: "Username or password is incorrect."
+4. Use Jesse / cool -> you should be redirected to index.php.
+5. Click Log Out -> you should return to login.php.
