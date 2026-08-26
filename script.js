@@ -60,6 +60,34 @@ document
 
 
 
+// Load available courts into the "Select a Court" dropdown (G.2)
+
+function loadCourts() {
+    fetch('php/courts_list.php')
+        .then(function(response) {
+            if (!response.ok) throw new Error('Failed to load courts: ' + response.status);
+            return response.json();
+        })
+        .then(function(data) {
+            const courtSelect = document.getElementById("courtSelect");
+            courtSelect.innerHTML = '<option value="">Select a court</option>';
+
+            data.courts.forEach(function(court) {
+                const option = document.createElement("option");
+                option.value = court.court_id;
+                option.textContent = court.name + " (" + court.status + ")";
+                courtSelect.appendChild(option);
+            });
+        })
+        .catch(function(error) {
+            console.error('Failed to load courts:', error);
+        });
+}
+
+loadCourts();
+
+
+
 // Set the default game time
 // to the user's current time
 
@@ -90,7 +118,7 @@ setCurrentTime();
 
 
 
-// Create Game
+// Create Game (G.1, G.1.1, G.2)
 
 document
     .getElementById("gameForm")
@@ -100,62 +128,117 @@ document
 
             event.preventDefault();
 
-
-            const court =
+            const courtId =
                 document
                     .getElementById("courtSelect")
                     .value;
-
 
             const gameType =
                 document
                     .getElementById("gameType")
                     .value;
 
-
             const skillLevel =
                 document
                     .getElementById("gameSkill")
                     .value;
-
 
             const time =
                 document
                     .getElementById("gameTime")
                     .value;
 
+            const maxPlayers =
+                document
+                    .getElementById("maxPlayers")
+                    .value;
+
+            const description =
+                document
+                    .getElementById("gameDescription")
+                    .value;
+
+            const gameMessage =
+                document
+                    .getElementById("gameMessage");
 
             // Check if required fields are empty
 
             if (
-                court === "" ||
+                courtId === "" ||
                 gameType === "" ||
                 skillLevel === "" ||
-                time === ""
+                time === "" ||
+                maxPlayers === ""
             ) {
 
-                document
-                    .getElementById("gameMessage")
-                    .textContent =
+                gameMessage.textContent =
                     "Please complete all required fields.";
 
                 return;
 
             }
 
+            // Combine today's date with the chosen time into a MySQL DATETIME
+            const today = new Date();
+            const datePart =
+                today.getFullYear() + "-" +
+                String(today.getMonth() + 1).padStart(2, "0") + "-" +
+                String(today.getDate()).padStart(2, "0");
+            const startTime = datePart + " " + time + ":00";
 
-            document
-                .getElementById("gameMessage")
-                .textContent =
-                "Game created successfully! "
-                + gameType
-                + " at "
-                + court
-                + " starting at "
-                + time
-                + ". Skill Level: "
-                + skillLevel
-                + ".";
+            const courtLabel =
+                document
+                    .getElementById("courtSelect")
+                    .selectedOptions[0]
+                    .textContent;
+
+            fetch('php/create_game.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({
+                    court_id: courtId,
+                    format: gameType,
+                    start_time: startTime,
+                    max_players: maxPlayers,
+                    skill_level: skillLevel,
+                    description: description
+                })
+            })
+                .then(function(response) {
+                    return response.json().then(function(data) {
+                        return { ok: response.ok, data: data };
+                    });
+                })
+                .then(function(result) {
+                    if (!result.ok || !result.data.success) {
+                        gameMessage.textContent =
+                            result.data.message || "Unable to create the game. Please try again.";
+                        return;
+                    }
+
+                    gameMessage.textContent =
+                        "Game created successfully! "
+                        + gameType
+                        + " at "
+                        + courtLabel
+                        + " starting at "
+                        + time
+                        + ". Skill Level: "
+                        + skillLevel
+                        + ".";
+
+                    document.getElementById("gameForm").reset();
+                    setCurrentTime();
+                    loadCourts();
+                    loadCourtStatus();
+                })
+                .catch(function(error) {
+                    gameMessage.textContent =
+                        "A network error occurred. Please try again.";
+                    console.error('Create game failed:', error);
+                });
 
         }
     );
@@ -271,8 +354,8 @@ var map = L.map('leafletMap', {
 
 //Tile layers from Maptiler (including attribution)
 
-L.tileLayer('https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=tJwk9meS0E9ByXaEfPw7', {
-    attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+L.tileLayer('[api.maptiler.com](https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=tJwk9meS0E9ByXaEfPw7)', {
+    attribution: '<a href="[maptiler.com](https://www.maptiler.com/copyright/)" target="_blank">&copy; MapTiler</a> <a href="[openstreetmap.org](https://www.openstreetmap.org/copyright)" target="_blank">&copy; OpenStreetMap contributors</a>',
 }).addTo(map);
 
 
