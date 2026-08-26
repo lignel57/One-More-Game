@@ -354,10 +354,9 @@ var map = L.map('leafletMap', {
 
 //Tile layers from Maptiler (including attribution)
 
-L.tileLayer('[api.maptiler.com](https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=tJwk9meS0E9ByXaEfPw7)', {
-    attribution: '<a href="[maptiler.com](https://www.maptiler.com/copyright/)" target="_blank">&copy; MapTiler</a> <a href="[openstreetmap.org](https://www.openstreetmap.org/copyright)" target="_blank">&copy; OpenStreetMap contributors</a>',
+L.tileLayer('https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=tJwk9meS0E9ByXaEfPw7', {
+    attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 }).addTo(map);
-
 
 // Names and coordinates of the two courts
 
