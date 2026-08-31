@@ -1,0 +1,22 @@
+FINAL CLEANUP SUMMARY
+=====================
+- index.php is the single main application.
+- browse.php is now a compatibility redirect to index.php#browse.
+- Browse filters, roster display, full-game alternatives, and court filter are merged into index.php/script.js.
+- Court Status now shows every court, including available courts.
+- Court Map now includes all three seeded courts and shows current game availability in popups.
+- Removed invalid extra <title> from the page body.
+- Join-game backend now blocks past/full/duplicate joins and locks capacity during join.
+- Removed unused legacy browse.css and browse.js.
+- Login/account/session/database flow was preserved.
+- PHP and JavaScript syntax checks pass.
+
+FINAL HOST/MAP FEATURES
+- Added visible Court Map legend: Red = empty, Yellow = 1-3 players, Green = 4+ players.
+- Court markers now use those live player-count colors.
+- Only the game creator sees Edit Game and Cancel Game controls.
+- Hosts can edit court, format, date/time, max players, skill level, and description.
+- Changing format automatically suggests the matching player capacity (5v5=10, 4v4=8, 3v3=6, 2v2=4).
+- Hosts can cancel a game; cancelled games disappear from Browse/Status/Map.
+- Added server-side ownership checks so another user cannot edit/cancel someone else's game.
+- db.php now automatically supports common XAMPP and MAMP defaults.

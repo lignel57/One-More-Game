@@ -1,0 +1,54 @@
+ONE MORE GAME - XAMPP TESTING GUIDE
+===================================
+
+1) Install/open XAMPP.
+2) In XAMPP Control Panel, start BOTH Apache and MySQL.
+3) Extract the folder "One-More-Game-main" into:
+   C:\xampp\htdocs\
+
+4) Open your browser and go to:
+   http://localhost/phpmyadmin/
+
+5) Click the SQL tab (or Import), choose:
+   One-More-Game-main\sql\schema.sql
+   and run/import it.
+
+   IMPORTANT: schema.sql resets the local onemoregame_db database so the
+   database exactly matches this version of the project.
+
+6) Open:
+   http://localhost/One-More-Game-main/
+
+7) Demo login:
+   Username: Jesse
+   Password: cool
+
+CREATE-ACCOUNT TEST
+-------------------
+A) On the login screen click "Create Account".
+B) Create a NEW username/email and password (minimum 6 characters).
+C) After successful registration you are sent back to Login.
+D) Log in with the NEW username/password you just created.
+E) Confirm the main app says Welcome with your name.
+
+FULL CAPSTONE TEST
+-----------------
+[ ] Create a new account
+[ ] Log in with the new account
+[ ] Open Court Status
+[ ] Open Court Map (internet required for map tiles)
+[ ] Browse the seeded games
+[ ] Join a game
+[ ] Create a future game
+[ ] Confirm the created game appears under Browse Games/Court Status
+[ ] Open Account
+[ ] Edit name/email/skill level
+[ ] Optionally change password, then log out and test the new password
+[ ] Log out and confirm protected pages send you back to Login
+
+NOTES
+-----
+- This project is PHP + MySQL. Opening index.html directly by double-clicking
+  will NOT run the application correctly. Use the localhost URL above.
+- Apache and MySQL must both be running in XAMPP.
+- The Court Map uses online map services, so that part needs internet access.

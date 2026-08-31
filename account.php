@@ -4,16 +4,18 @@
 // A.3   - Provide an edit option for name, email, password, skill level.
 // A.4   - Notification icon (stubbed - no notifications table yet).
 // A.5   - Provide a log out option.
-// A.5.1 - Log out redirects the user to the main page.
+// A.5.1 - Log out ends the session and redirects to Login.
 //
-// Same placeholder session pattern as browse.php until login (A.1) is set up.
-
 session_start();
 require_once "php/db.php";
 
-$currentUserId = $_SESSION['user_id'] ?? 1; // placeholder until login/session is wired up
+if (empty($_SESSION['is_logged_in']) || empty($_SESSION['user_id'])) {
+    header('Location: php/login.php');
+    exit;
+}
+$currentUserId = (int)$_SESSION['user_id'];
 
-$stmt = $conn->prepare("SELECT user_id, name, email, skill_level FROM users WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT user_id, name, username, email, skill_level FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $currentUserId);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
@@ -22,7 +24,7 @@ $stmt->close();
 if (!$user) {
     // Falls back to a blank shell rather than a hard crash if the placeholder
     // user_id doesn't exist yet (e.g. schema.sql hasn't been seeded).
-    $user = ['user_id' => $currentUserId, 'name' => '', 'email' => '', 'skill_level' => 'Beginner'];
+    $user = ['user_id' => $currentUserId, 'name' => '', 'username' => '', 'email' => '', 'skill_level' => 'Beginner'];
 }
 
 // A.4
@@ -45,7 +47,7 @@ $conn->close();
 <body>
 
 <header class="account-header">
-  <a href="main.php" class="brand">One More Game</a>
+  <a href="index.php" class="brand">One More Game</a>
 
   <!-- A.4 - notification icon -->
   <div class="notif-wrap">
@@ -79,6 +81,10 @@ $conn->close();
     <div class="field-row">
       <span class="field-label">Name</span>
       <span class="field-value" id="displayName"><?php echo htmlspecialchars($user['name']); ?></span>
+    </div>
+    <div class="field-row">
+      <span class="field-label">Username</span>
+      <span class="field-value" id="displayUsername"><?php echo htmlspecialchars($user['username']); ?></span>
     </div>
     <div class="field-row">
       <span class="field-label">Email</span>

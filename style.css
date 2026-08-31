@@ -430,3 +430,143 @@ footer {
     }
 
 }
+
+.user-bar {
+    color: #ddd;
+    font-size: 0.95rem;
+    margin-top: 6px;
+}
+.user-bar a { color: #ff8a1f; text-decoration: none; font-weight: 700; }
+.user-bar a:hover { text-decoration: underline; }
+
+/* Browse filters merged from the old standalone browse page */
+.browse-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(150px, 1fr)) auto auto;
+    gap: 10px;
+    align-items: center;
+    margin: 0 0 25px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.browse-filters select {
+    margin: 0;
+}
+
+.browse-filters button {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 5px;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.browse-filters .secondary-filter {
+    background: #777;
+}
+
+.roster-line {
+    overflow-wrap: anywhere;
+}
+
+.alt-suggestion {
+    margin-top: 12px;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+@media (max-width: 760px) {
+    .browse-filters {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Court map status legend */
+#leafletMap {
+    height: 520px;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 20px;
+    max-width: 720px;
+    margin: 0 auto 30px;
+}
+
+.map-legend h4 {
+    width: 100%;
+    margin: 0 0 4px;
+}
+
+.legend-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+}
+
+.legend-marker {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #333;
+}
+.legend-empty { background: #e74c3c; }
+.legend-low { background: #f1c40f; }
+.legend-busy { background: #2ecc71; }
+
+.game-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.game-actions button {
+    flex: 1 1 130px;
+}
+
+.game-actions .edit-game-button {
+    background: #444;
+}
+
+.game-actions .cancel-game-button {
+    background: #a83232;
+}
+
+.host-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #222;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Leaflet legend shown inside the map */
+.leaflet-control.info.legend {
+    background: rgba(255, 255, 255, 0.96);
+    padding: 10px 12px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
+    line-height: 1.5;
+}
+
+.leaflet-control.info.legend h4 {
+    margin: 0 0 7px;
+}

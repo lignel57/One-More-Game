@@ -1,2 +1,18 @@
-# One-More-Game
-One More Game is a web platform built for people to find and join pickup basketball games nearby. The site shows real time availability of courts, so instead of digging through group chats or social media to figure out who's playing and where, people can just open the app and see what's happening close by.
+# One More Game
+
+A PHP/MySQL capstone web app for finding, creating, and joining pickup basketball games.
+
+## Main flow
+Create Account → Login → Court Status / Map → Browse or Create Games → Join Games → Account → Logout
+
+## Local setup
+Use XAMPP with Apache + MySQL. Import `sql/schema.sql` in phpMyAdmin, then visit:
+
+`http://localhost/One-More-Game-main/`
+
+Demo account: `Jesse` / `cool`
+
+See `TESTING_INSTRUCTIONS.txt` for the full test checklist.
+
+## Project structure
+`index.php` is the single main application. The legacy `browse.php` route now redirects to the Browse Games tab so there is only one Browse implementation to maintain.
